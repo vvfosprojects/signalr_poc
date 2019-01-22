@@ -3,13 +3,13 @@ export class ChatMessage {
 
   user: string;
   message: string;
-  room: string;
+  group: string;
   sent: Date;
 
-  constructor(user: string = '', message: string = '', room: string = '', date: string = '') {
+  constructor(user: string = '', message: string = '', group: string = '', date: string = '') {
     this.user = user;
     this.message = message;
-    this.room = room;
+    this.group = group;
     this.sent = new Date(date);
   }
 }

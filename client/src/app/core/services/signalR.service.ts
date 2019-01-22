@@ -6,7 +6,9 @@ import { Group } from '../../shared/models/group.model';
 import { CONFIGURATION } from '../../shared/app.constants';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class SignalRService {
     messageReceived = new Subject<ChatMessage>();
     connectionEstablished = new Subject<Boolean>();
