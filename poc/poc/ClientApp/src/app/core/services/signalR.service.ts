@@ -11,6 +11,8 @@ import { CONFIGURATION } from '../../shared/app.constants';
 })
 export class SignalRService {
     connectionIsOk: boolean;
+    actualGroup: Group[] = [];
+    actualMessages: ChatMessage[] = [];
     messageReceived = new Subject<ChatMessage>();
     connectionEstablished = new Subject<Boolean>();
     private hubConnection: HubConnection;

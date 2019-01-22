@@ -16,6 +16,8 @@ export class DashboardComponent {
     constructor(private signalRService: SignalRService,
                 private ngZone: NgZone) {
         this.canSendMessage = this.signalRService.connectionIsOk;
+        this.groups = this.signalRService.actualGroup;
+        this.allMessages = this.signalRService.actualMessages;
         this.subscribeToEvents();
     }
 

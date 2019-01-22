@@ -12,14 +12,14 @@
         </form>
     </div>
     <div class="col-md-6">
-        <h4>Lista Canali in ascolto</h4>
+        <h4><span *ngIf="groups.length > 0">Lista Canali</span><span *ngIf="groups.length === 0">Nessun Canale</span> in ascolto</h4>
         <form class="form-inline" *ngFor="let group of groups">
             <div class="form-group">
                 <input type="text" class="form-control" id="listaCanali" placeholder="Canale"
                        value="{{group.id}}"
-                       name="listaCanali">
+                       name="listaCanali" disabled>
             </div>
-            <button (click)="removeToGroup(group)" class="btn btn-default" [disabled]="!canSendMessage">Rimuovi</button>
+            <button type="button" (click)="removeToGroup(group)" class="btn btn-primary" [disabled]="!canSendMessage">Esci</button>
         </form>
     </div>
 </div>
