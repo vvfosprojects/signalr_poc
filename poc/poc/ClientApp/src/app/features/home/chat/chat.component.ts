@@ -8,7 +8,6 @@ import { ChatMessage } from '../../../shared/models/chatMessage.model';
 })
 export class ChatComponent {
     currentMessage: ChatMessage = new ChatMessage();
-    allMessages: ChatMessage[] = [];
     canSendMessage: boolean;
 
     constructor(private signalRService: SignalRService) {

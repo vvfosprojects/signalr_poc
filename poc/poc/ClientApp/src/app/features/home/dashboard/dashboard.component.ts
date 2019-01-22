@@ -18,15 +18,14 @@ export class DashboardComponent {
         this.subscribeToEvents();
     }
 
-    private static getCopy(value): any {
-        return (JSON.parse(JSON.stringify(value)));
-    }
-
     addToGroup() {
         if (this.canSendMessage) {
-            const current = DashboardComponent.getCopy(this.currentGroup);
-            this.groups.push(current);
-            this.signalRService.addToGroup(current);
+            const newGroup: Group = new Group(this.currentGroup.id);
+            const result = this.groups.filter(p => p.id === newGroup.id);
+            if (result.length === 0 || this.groups.length === 0) {
+                this.groups.push(newGroup);
+                this.signalRService.addToGroup(newGroup);
+            }
         }
     }
 
