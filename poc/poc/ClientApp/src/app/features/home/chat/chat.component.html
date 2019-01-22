@@ -1,0 +1,13 @@
+<h2>Master</h2>
+<h3 for="messaggi">Messaggi SignalR</h3>
+<form class="form-inline" (ngSubmit)="sendMessage()">
+    <div class="form-group">
+        <input style="width: 80px" type="text" class="form-control" id="canale" placeholder="Canale"
+               [(ngModel)]="currentMessage.group"
+               name="canale">
+        <input style="width: 380px"type="text" class="form-control" id="messaggi" placeholder="Messaggio"
+               [(ngModel)]="currentMessage.message"
+               name="message">
+    </div>
+    <button type="submit" class="btn btn-default" [disabled]="!canSendMessage">Invia</button>
+</form>
