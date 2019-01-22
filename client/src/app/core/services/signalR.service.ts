@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { Subject } from 'rxjs';
 import { ChatMessage } from '../../shared/models/chatMessage.model';
+import { Group } from '../../shared/models/group.model';
 import { CONFIGURATION } from '../../shared/app.constants';
+
 
 @Injectable()
 export class SignalRService {
@@ -17,21 +19,21 @@ export class SignalRService {
         this.startConnection();
     }
 
-    sendChatMessage(message: ChatMessage, nick: string, room: string) {
-        this.hubConnection.invoke('SendMessage', room, nick, message);
+    sendChatMessage(message: ChatMessage) {
+        this.hubConnection.invoke('SendMessage', message);
     }
 
-    removeToGroup(message: ChatMessage) {
-        this.hubConnection.invoke('AddToGroup', message);
+    removeToGroup(group: Group) {
+        this.hubConnection.invoke('AddToGroup', group.room.toString());
     }
 
-    addToGroup(message: ChatMessage) {
-        this.hubConnection.invoke('RemoveToGroup', message);
+    addToGroup(group: Group) {
+        this.hubConnection.invoke('RemoveToGroup', group.room.toString());
     }
 
     private createConnection() {
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl(CONFIGURATION.baseUrls.server)
+            .withUrl(CONFIGURATION.baseUrls)
             .build();
     }
 
@@ -43,7 +45,7 @@ export class SignalRService {
     }
 
     private registerOnServerEvents(): void {
-        this.hubConnection.on('Send', (data: any) => {
+        this.hubConnection.on('ReceiveMessage', (data: any) => {
             this.messageReceived.next(data);
         });
     }

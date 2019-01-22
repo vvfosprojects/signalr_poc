@@ -18,13 +18,12 @@ export class ChatComponent {
     sendMessage() {
         if (this.canSendMessage) {
             this.currentMessage.sent = new Date();
-            this.signalRService.sendChatMessage(this.currentMessage, 'Pippo', '1');
+            this.signalRService.sendChatMessage(this.currentMessage);
         }
     }
 
     private subscribeToEvents(): void {
         this.signalRService.connectionEstablished.subscribe(() => {
-            console.log('test');
             this.canSendMessage = true;
         });
 
