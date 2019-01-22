@@ -17,17 +17,24 @@ export class DashboardComponent {
         this.subscribeToEvents();
     }
 
+    private static getCopy(value): any {
+        return (JSON.parse(JSON.stringify(value)));
+    }
+
     addToGroup() {
         if (this.canSendMessage) {
-            this.groups.push(this.currentGroup);
-            this.signalRService.addToGroup(this.currentGroup);
+            const current = DashboardComponent.getCopy(this.currentGroup);
+            this.groups.push(current);
+            this.signalRService.addToGroup(current);
         }
     }
 
     removeToGroup(group: Group) {
         if (this.canSendMessage) {
             const index = this.groups.indexOf(group);
-            this.groups.slice(index, 1);
+            if (index > -1) {
+                this.groups.splice(index, 1);
+            }
             this.signalRService.removeToGroup(group);
         }
     }

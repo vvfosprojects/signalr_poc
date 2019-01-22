@@ -1,3 +1,3 @@
 export let CONFIGURATION = {
-  baseUrls: 'chatHub'
+  baseUrls: 'chathub'
 };

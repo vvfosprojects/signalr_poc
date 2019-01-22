@@ -24,11 +24,11 @@ export class SignalRService {
     }
 
     removeToGroup(group: Group) {
-        this.hubConnection.invoke('AddToGroup', group.room.toString());
+        this.hubConnection.invoke('AddToGroup', group.id.toString());
     }
 
     addToGroup(group: Group) {
-        this.hubConnection.invoke('RemoveToGroup', group.room.toString());
+        this.hubConnection.invoke('RemoveToGroup', group.id.toString());
     }
 
     private createConnection() {
@@ -41,6 +41,9 @@ export class SignalRService {
         this.hubConnection.start().then(() => {
             console.log('Hub connection started');
             this.connectionEstablished.next(true);
+        }).catch(err => {
+            console.log('Error while establishing connection, retrying...');
+            setTimeout(() => this.startConnection(), 5000);
         });
     }
 
