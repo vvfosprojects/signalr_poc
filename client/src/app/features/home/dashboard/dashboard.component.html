@@ -1,7 +1,7 @@
 <h2>Client</h2>
 <div class="row">
     <div class="col-md-6">
-        <h4 for="sceltaCanale">Aggiungi Canale SignalrR</h4>
+        <h4>Aggiungi Canale SignalrR</h4>
         <form class="form-inline" (ngSubmit)="addToGroup()">
             <div class="form-group">
                 <input type="text" class="form-control" id="sceltaCanale" placeholder="Canale"
@@ -12,7 +12,7 @@
         </form>
     </div>
     <div class="col-md-6">
-        <h4 for="listaCanali">Lista Canali in ascolto</h4>
+        <h4>Lista Canali in ascolto</h4>
         <form class="form-inline" *ngFor="let group of groups">
             <div class="form-group">
                 <input type="text" class="form-control" id="listaCanali" placeholder="Canale"
