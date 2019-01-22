@@ -10,10 +10,10 @@ import { CONFIGURATION } from '../../shared/app.constants';
     providedIn: 'root'
 })
 export class SignalRService {
+    connectionIsOk: boolean;
     messageReceived = new Subject<ChatMessage>();
     connectionEstablished = new Subject<Boolean>();
     private hubConnection: HubConnection;
-
 
     constructor() {
         this.createConnection();
@@ -43,6 +43,7 @@ export class SignalRService {
         this.hubConnection.start().then(() => {
             console.log('Hub connection started');
             this.connectionEstablished.next(true);
+            this.connectionIsOk = true;
         }).catch(err => {
             console.log('Error while establishing connection, retrying...');
             setTimeout(() => this.startConnection(), 5000);

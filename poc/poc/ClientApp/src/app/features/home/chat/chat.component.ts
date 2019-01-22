@@ -11,6 +11,7 @@ export class ChatComponent {
     canSendMessage: boolean;
 
     constructor(private signalRService: SignalRService) {
+        this.canSendMessage = this.signalRService.connectionIsOk;
         this.subscribeToEvents();
     }
 
