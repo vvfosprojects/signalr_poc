@@ -43,8 +43,8 @@ export class DashboardComponent {
     }
 
     private subscribeToEvents(): void {
-        this.signalRService.connectionEstablished.subscribe(() => {
-            this.canSendMessage = true;
+        this.signalRService.connectionEstablished.subscribe((bool) => {
+            this.canSendMessage = bool;
         });
         this.signalRService.messageReceived.subscribe((message: ChatMessage) => {
             this.ngZone.run(() => {

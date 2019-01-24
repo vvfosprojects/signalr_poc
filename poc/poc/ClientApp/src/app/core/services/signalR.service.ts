@@ -14,7 +14,7 @@ export class SignalRService {
     actualGroup: Group[] = [];
     actualMessages: ChatMessage[] = [];
     messageReceived = new Subject<ChatMessage>();
-    connectionEstablished = new Subject<Boolean>();
+    connectionEstablished = new Subject<boolean>();
     private hubConnection: HubConnection;
 
     constructor() {
@@ -55,6 +55,12 @@ export class SignalRService {
     private registerOnServerEvents(): void {
         this.hubConnection.on('ReceiveMessage', (data: any) => {
             this.messageReceived.next(data);
+        });
+        this.hubConnection.onclose( () => {
+            console.log('SignalR Disconnesso');
+            this.connectionEstablished.next(false);
+            this.connectionIsOk = false;
+            this.startConnection();
         });
     }
 }
